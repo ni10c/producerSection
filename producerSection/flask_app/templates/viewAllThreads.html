@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <style>
+        .tableFixHead {
+            overflow-y: auto;
+            height: 300px;
+        }
+        .tableFixHead thead th {
+            position: sticky;
+            background-color: rgb(120, 135, 150);
+            top: 0;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th,
+        td {
+            padding: 8px 16px;
+            border: 1px solid rgb(255, 255, 255);
+            max-width: 125px;
+        }
+        #viewDiv {
+            width: 780px;
+            height: 495px;
+        }
+    </style>
+    <title>Discussion Threads</title>
+</head>
+<body>
+    <div class="d-flex justify-content-between p-3 m-3">
+        <h1 class="text">ProducerSection</h1>
+        <div>
+            <!-- dont forget to pay attention to this change to homepage -->
+            <a href="/homepage" class="btn btn-primary">Homepage</a>
+            <a href="/logout" class="btn btn-primary">Logout</a>
+        </div>
+    </div>
+    <div class="d-flex flex-row justify-content-center">
+        <!-- <div class="p-lg-5 w-50 m-5 h-75" style="background-color: rgb(120, 135, 150);"> -->
+        <div id="viewDiv" class="p-5 m-5" style="background-color: rgb(120, 135, 150);">
+            <h3 class="text-center">Discussion Threads</h3>
+            <div class="tableFixHead">
+
+                <table class="text-center">
+                    <thead>
+                        <tr>
+                            <th>Topic</th>
+                            <th>Posted</th>
+                            <th>Posted By</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider"></tbody>
+                    {% for thread in threads %}
+                        <tr>
+                            <td class="text-break"><a href="/thread/view/{{thread.id}}">{{thread.topic}}</a></td>
+                            <td class="text-break">{{thread.created_at.strftime('%m-%d-%Y')}}</td>
+                            <td class="text-break">{{thread.user.username}}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <div class="text-center">
+                <br>
+                <a href="/thread/new" class="btn btn-primary">Create Thread</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
